@@ -1,0 +1,47 @@
+<!-- public/user.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Information</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="user-info">
+        <h1>User Information</h1>
+        <p><strong>First Name:</strong> <span id="first-name"></span></p>
+        <p><strong>Last Name:</strong> <span id="last-name"></span></p>
+        <p><strong>Username:</strong> <span id="username"></span></p>
+        <p><strong>Email:</strong> <span id="email"></span></p>
+        <p><strong>Mobile:</strong> <span id="mobile"></span></p>
+        <p><strong>Gender:</strong> <span id="gender"></span></p>
+        <button onclick="logout()">Logout</button>
+      </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Retrieve user data from localStorage
+      const user = JSON.parse(localStorage.getItem('user'));
+  
+      if (user) {
+          // Populate the page with user data
+          document.getElementById('first-name').textContent = user.firstName || 'N/A';
+          document.getElementById('last-name').textContent = user.lastName || 'N/A';
+          document.getElementById('username').textContent = user.username || 'N/A';
+          document.getElementById('email').textContent = user.email || 'N/A';
+          document.getElementById('mobile').textContent = user.mobile || 'N/A';
+          document.getElementById('gender').textContent = user.gender || 'N/A';
+        } else {
+          alert('User not logged in');
+          window.location.href = 'index.html'; // Redirect to login page if not logged in
+        }
+      });
+    function logout() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.location.href = 'index.html'; // Redirect to login page
+    }
+  </script>
+  
+</body>
+</html>
